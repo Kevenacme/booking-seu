@@ -23,15 +23,16 @@ export const Routes = () => {
             <Route exact path="/orderlist">
                 <Orderlist />
             </Route>
+            <Route path="/search/:destination/:id/purchase">
+                <Purchase />
+            </Route>
             <Route path="/search/:destination/:id">
                 <HotelDetails />
             </Route>
             <Route path="/search/:destination">
                 <SearchPage />
             </Route>
-            <Route path="/search/:id/purchase">
-                <Purchase />
-            </Route>
+            
         </Switch>
     </>
 }

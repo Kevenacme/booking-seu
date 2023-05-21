@@ -94,7 +94,7 @@ const onChange = (value) => {
     console.log('changed', value);
   };
 
-export const SearchHouse= ({id,url}) => {
+export const SearchHouse= ({destination,id,url}) => {
     return (
     <div>
         <h2>空房情况</h2>
@@ -108,7 +108,7 @@ export const SearchHouse= ({id,url}) => {
                     <InputNumber size="middle" min={0} max={30} defaultValue={3} onChange={onChange} />位成人
                     <InputNumber size="middle" min={0} max={30} defaultValue={3} onChange={onChange} />名儿童
                     <InputNumber size="middle" min={0} max={30} defaultValue={3} onChange={onChange} />间客房
-                    <Link to={`/search/${id}/purchase`}>
+                    <Link to={`/search/${destination}/${id}/purchase`}>
                         <Reserve>
                             <p>
                                 付款
