@@ -1,7 +1,7 @@
 import React from 'react';
 import { Navbar } from '../Navbar/Navbar';
 import { Table } from 'antd';
-
+import { useState,useEffect } from 'react';
 const Orderlist = ({ price, hotelname, checkindate, checkoutdate, roommodel }) => {
     const [data, setData] = useState([]); // 状态变量，用于存储表格数据
 
