@@ -33,7 +33,5 @@ export const Routes = () => {
                 <Purchase />
             </Route>
         </Switch>
-
     </>
-
 }
