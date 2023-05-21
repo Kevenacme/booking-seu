@@ -5,17 +5,23 @@ import GoogleLogin from "react-google-login";
 
 const Login = () => {
   const [email, setEmail] = useState('');
+  const [username,setUsername]=useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
   const handleChange = (e) => {
     let str = e.target.value;
+    setEmail(str);
     if (str.includes("@") && str.includes(".")) {
       setShowPassword(true);
     } else {
       setShowPassword(false);
     }
   };
+   
+  const handleUsernameChange =(e)=>{
+    setUsername(e.target.value);
+  }
 
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
@@ -24,9 +30,11 @@ const Login = () => {
   const handlePasswordConfirmationChange = (e) => {
     setPasswordConfirmation(e.target.value);
   };
-
+ 
   const handleSubmit = (e) => {
     e.preventDefault();
+    alert("注册成功")
+    window.location.href = 'http://localhost:3000/';
     // 处理登录逻辑
   };
 
@@ -80,10 +88,10 @@ const Login = () => {
           />
           <label htmlFor="username">用户名</label>
           <input
-            //onChange={handleChange}
+            onChange={handleUsernameChange}
             className={styles.input}
-            type="email"
-            name="email"
+            type="username"
+            name="username"
             id="username"
             autoFocus
           />

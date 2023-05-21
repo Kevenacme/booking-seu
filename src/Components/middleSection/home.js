@@ -6,10 +6,12 @@ import Leeds from './image/leeds.png';
 import reading from './image/reading.png';
 import newcastle from './image/newcastle.png';
 import birmingam from './image/birmingam.png';
-
-
-
-
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
+import Beijing from './image/Beijing.jpg'
+import Shanghai from './image/Shanghai.jpg'
+import Nanjing from './image/Nanjing.jpg'
+import Xian from './image/Xian.jpg'
+import Zhejiang from './image/Zhejiang.jpg'
 function FirstPage() {
     return (
         <div>
@@ -58,37 +60,51 @@ function FirstPage() {
                 <div className="Cities">
 
                     <div className="manchester">
-                        <img src={manchester} alt="avatar2" />
+                        <Link to={`/search/北京`}>
+                            <img src={Beijing} alt="avatar2" />
+                        </Link>
                         <span className="headmanchester">北京</span>
-                        
+
                     </div>
                     <div className="manchester">
+                        <Link to={`/search/上海`}>
+                            <img src={Shanghai} alt="avatar2" />
+                        </Link>
+
                         <span className="headmanchester">上海</span>
-                        <img src={Leeds} alt="avatar2" />
+
                     </div>
 
                 </div>
 
                 <div className="citythree">
                     <div className="manchester">
-                        <img src={reading} alt="avatar2" />
+                        <Link to={`/search/南京`}>
+                            <img src={Nanjing} alt="avatar2" />
+                        </Link>
+
                         <span className="headmanchester">南京</span>
-                        
+
                     </div>
                     <div className="manchester">
-                        <img src={newcastle} alt="avatar2" />
+                        <Link to={`/search/西安`}>
+                            <img src={Xian} alt="avatar2" />
+                        </Link>
                         <span className="headmanchester">西安</span>
-                        
+
                     </div>
                     <div className="manchester">
-                        <img src={birmingam} alt="avatar2" />
+
+                        <Link to={`/search/浙江`}>
+                            <img src={Zhejiang} alt="avatar2" />
+                        </Link>
                         <span className="headmanchester">浙江</span>
-                        
+
                     </div>
                 </div>
 
 
-            </div><br/>
+            </div><br />
 
         </div>
     )

@@ -43,7 +43,7 @@ function MiddleSection() {
             
             <div className="diver">
               <h4 className="subhead">酒店</h4>
-              <p className="bbrowssub">10400 hotels</p>
+              
             </div>
 
 
@@ -55,7 +55,7 @@ function MiddleSection() {
             </div>
             <div className="diver">
               <h4 className="subhead">公寓</h4>
-              <p className="bbrowssub">807,884 公寓</p>
+             
             </div>
           </Item>
 
@@ -65,7 +65,7 @@ function MiddleSection() {
             </div>
             <div className="diver">
               <h4 className="subhead">度假村</h4>
-              <p className="bbrowssub">17,482 度假村</p>
+              
             </div>
 
           </Item>
@@ -76,7 +76,7 @@ function MiddleSection() {
             </div>
             <div className="diver">
               <h4 className="subhead">别墅</h4>
-              <p className="bbrowssub">406,281 别墅</p>
+              
             </div>
 
           </Item>
@@ -87,7 +87,7 @@ function MiddleSection() {
             </div>
             <div className="diver">
               <h4 className="subhead">木屋</h4>
-              <p className="bbrowssub">31,734 木屋</p>
+             
             </div>
 
           </Item>
@@ -98,7 +98,7 @@ function MiddleSection() {
             </div>
             <div className="diver">
               <h4 className="subhead">村舍</h4>
-              <p className="bbrowssub">142,790 村舍</p>
+           
             </div>
 
           </Item>
@@ -109,7 +109,7 @@ function MiddleSection() {
             </div>
             <div className="diver">
               <h4 className="subhead">公寓式酒店</h4>
-              <p className="bbrowssub">33,743 公寓式酒店</p>
+              
             </div>
 
           </Item>
@@ -120,7 +120,7 @@ function MiddleSection() {
             </div>
             <div className="diver">
               <h4 className="subhead">度假屋</h4>
-              <p className="bbrowssub">406,281 度假屋</p>
+             
             </div>
 
           </Item>
@@ -131,7 +131,7 @@ function MiddleSection() {
             </div>
             <div className="diver">
               <h4 className="subhead">客房</h4>
-              <p className="bbrowssub">4532 客房</p>
+              
             </div>
 
           </Item>
@@ -142,7 +142,7 @@ function MiddleSection() {
             </div>
             <div className="diver">
               <h4 className="subhead">旅馆</h4>
-              <p className="bbrowssub">115,537 旅馆</p>
+              
             </div>
 
           </Item>

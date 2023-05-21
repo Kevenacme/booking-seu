@@ -1,11 +1,14 @@
 import React from "react";
 import styles from "../SearchData/DataComponent.module.css";
 import { Link } from "react-router-dom";
-
+import { useHistory } from 'react-router-dom';
 
 const DataComponent = ({ url, id, view, price, name, city, distance, bedSize, roomSize, cancelationPolicy, cancellation, reviews, rating, breakFast, availability, availableRooms, discountedPrice }) => {
   const lab = "查看可订项";
-  
+  const history = useHistory();
+  const handleButtonClick = () => {
+    history.push(`/search/${city}/${id}`);
+  };
   return (
     <div className={styles.maindiv}>
       <div className={styles.imgdiv}>
@@ -22,7 +25,7 @@ const DataComponent = ({ url, id, view, price, name, city, distance, bedSize, ro
               cursor: "pointer",
             }}
           >
-               {city}
+            {city}
           </p>
           <p
             style={{
@@ -115,7 +118,7 @@ const DataComponent = ({ url, id, view, price, name, city, distance, bedSize, ro
               fontSize: "13px",
             }}
           >
-              
+
           </p>
           <p style={{ margin: "0", padding: "0" }}>
             <span
@@ -139,21 +142,22 @@ const DataComponent = ({ url, id, view, price, name, city, distance, bedSize, ro
           >
             {/*tax and all*/}
           </p>
-          <Link to={`/search/${id}`}>
-            <button
-              style={{
-                backgroundColor: "#0071C2",
-                color: "white",
-                border: "none",
-                borderRadius: "3px",
-                padding: "15px",
-                marginTop: "10px",
-                cursor: "pointer",
-              }}
-            >
-              {lab}
-            </button>
-          </Link>
+          
+          <button onClick={handleButtonClick}
+            style={{
+              backgroundColor: "#0071C2",
+              color: "white",
+              border: "none",
+              borderRadius: "3px",
+              padding: "15px",
+              marginTop: "10px",
+              cursor: "pointer",
+              
+            } }
+          >
+            {lab}
+          </button>
+
         </div>
       </div>
     </div>

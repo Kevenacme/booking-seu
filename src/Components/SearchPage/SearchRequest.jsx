@@ -1,9 +1,9 @@
 import { useState } from "react"
 import styles from "./SearchRequest.module.css"
 import Calendar from "react-calendar"
-
-
-export const SearchRequest = ({ filterSearch }) => {
+import { Link } from "react-router-dom";
+import { useHistory } from 'react-router-dom';
+export const SearchRequest = () => {
     const [destination, setDestination] = useState("")
     const [initvalue, onInitChange] = useState(new Date());
     const [endvalue, onEndChange] = useState(new Date());
@@ -40,7 +40,7 @@ export const SearchRequest = ({ filterSearch }) => {
         const endDate = new Date(endvalue.getFullYear(), endvalue.getMonth(), endvalue.getDate());
         const stayDuration = Math.round(Math.abs((endDate - startDate) / oneDay));
         return stayDuration;
-      };
+    };
     // const handleSelector = () => {
     //     setInitDate(false)
     //     setEndDate(false)
@@ -96,9 +96,10 @@ export const SearchRequest = ({ filterSearch }) => {
         setChild(false)
         setRoom(!room)
     }
-
+    const history = useHistory();
     const handleSearch = () => {
-        filterSearch(destination)
+        history.push(`/search/${destination}`);
+        window.location.reload();
         setDestination("")
         setAdults(1)
         setChildren(0)
@@ -124,7 +125,7 @@ export const SearchRequest = ({ filterSearch }) => {
             <p>入住日期</p>
             <div>
                 <svg aria-hidden="true" fill="#838181" focusable="false" height="20" role="presentation" width="20" viewBox="0 0 24 24"><path d="M22.502 13.5v8.25a.75.75 0 0 1-.75.75h-19.5a.75.75 0 0 1-.75-.75V5.25a.75.75 0 0 1 .75-.75h19.5a.75.75 0 0 1 .75.75v8.25zm1.5 0V5.25A2.25 2.25 0 0 0 21.752 3h-19.5a2.25 2.25 0 0 0-2.25 2.25v16.5A2.25 2.25 0 0 0 2.252 24h19.5a2.25 2.25 0 0 0 2.25-2.25V13.5zm-23.25-3h22.5a.75.75 0 0 0 0-1.5H.752a.75.75 0 0 0 0 1.5zM7.502 6V.75a.75.75 0 0 0-1.5 0V6a.75.75 0 0 0 1.5 0zm10.5 0V.75a.75.75 0 0 0-1.5 0V6a.75.75 0 0 0 1.5 0z"></path></svg>
-                <input type="text" placeholder="Mon 30 Aug" onClick={handleInitDate} value={`${currentDay} ${currentDayNum} ${currentMonth}`} />
+                <input type="text" placeholder="Mon 30 Aug" onClick={handleInitDate} value={`${currentDay} ${currentMonth}${currentDayNum}日`} />
                 <svg aria-hidden="true" fill="#838181" focusable="false" height="18" role="presentation" width="18" viewBox="0 0 24 24"><path d="M18 9.45c0 .2-.078.39-.22.53l-5 5a1.08 1.08 0 0 1-.78.32 1.1 1.1 0 0 1-.78-.32l-5-5a.75.75 0 0 1 0-1.06.74.74 0 0 1 1.06 0L12 13.64l4.72-4.72a.74.74 0 0 1 1.06 0 .73.73 0 0 1 .22.53zm-5.72 4.47zm-.57 0z"></path></svg>
             </div>
 
@@ -135,7 +136,7 @@ export const SearchRequest = ({ filterSearch }) => {
             <p>离店日期</p>
             <div>
                 <svg aria-hidden="true" fill="#838181" focusable="false" height="20" role="presentation" width="20" viewBox="0 0 24 24"><path d="M22.502 13.5v8.25a.75.75 0 0 1-.75.75h-19.5a.75.75 0 0 1-.75-.75V5.25a.75.75 0 0 1 .75-.75h19.5a.75.75 0 0 1 .75.75v8.25zm1.5 0V5.25A2.25 2.25 0 0 0 21.752 3h-19.5a2.25 2.25 0 0 0-2.25 2.25v16.5A2.25 2.25 0 0 0 2.252 24h19.5a2.25 2.25 0 0 0 2.25-2.25V13.5zm-23.25-3h22.5a.75.75 0 0 0 0-1.5H.752a.75.75 0 0 0 0 1.5zM7.502 6V.75a.75.75 0 0 0-1.5 0V6a.75.75 0 0 0 1.5 0zm10.5 0V.75a.75.75 0 0 0-1.5 0V6a.75.75 0 0 0 1.5 0z"></path></svg>
-                <input type="text" placeholder="Mon 30 Aug 2021" onClick={handleEndDate} value={`${endDay} ${endDayNum} ${endMonth}`} />
+                <input type="text" placeholder="Mon 30 Aug 2021" onClick={handleEndDate} value={`${endDay} ${endMonth}${endDayNum}日`} />
                 <svg aria-hidden="true" fill="#838181" focusable="false" height="18" role="presentation" width="18" viewBox="0 0 24 24"><path d="M18 9.45c0 .2-.078.39-.22.53l-5 5a1.08 1.08 0 0 1-.78.32 1.1 1.1 0 0 1-.78-.32l-5-5a.75.75 0 0 1 0-1.06.74.74 0 0 1 1.06 0L12 13.64l4.72-4.72a.74.74 0 0 1 1.06 0 .73.73 0 0 1 .22.53zm-5.72 4.47zm-.57 0z"></path></svg>
             </div>
         </div>
@@ -170,7 +171,7 @@ export const SearchRequest = ({ filterSearch }) => {
 
         </div>
         <div className={styles.button}>
-            <button onClick={handleSearch}>搜索</button>
+                <button onClick={handleSearch}>搜索</button>
         </div>
         <div className={styles.cal}>
             {
@@ -233,30 +234,30 @@ function endDatePicker(D, M, day) {
     for (let i = 0; i < 12; i++) {
         month.push(0)
     }
-    month[0] = "Jan";
-    month[1] = "Feb";
-    month[2] = "March";
-    month[3] = "Apr";
-    month[4] = "May";
-    month[5] = "June";
-    month[6] = "July";
-    month[7] = "Aug";
-    month[8] = "Sept";
-    month[9] = "Oct";
-    month[10] = "Nov";
-    month[11] = "Dec";
+    month[0] = "1月";
+    month[1] = "2月";
+    month[2] = "3月";
+    month[3] = "4月";
+    month[4] = "5月";
+    month[5] = "6月";
+    month[6] = "7月";
+    month[7] = "8月";
+    month[8] = "9月";
+    month[9] = "10月";
+    month[10] = "11月";
+    month[11] = "12月";
 
     var weekday = [];
     for (let i = 0; i < 7; i++) {
         weekday.push(0)
     }
-    weekday[0] = "Sun";
-    weekday[1] = "Mon";
-    weekday[2] = "Tue";
-    weekday[3] = "Wed";
-    weekday[4] = "Thur";
-    weekday[5] = "Fri";
-    weekday[6] = "Sat";
+    weekday[0] = "周六";
+    weekday[1] = "周一";
+    weekday[2] = "周二";
+    weekday[3] = "周三";
+    weekday[4] = "周四";
+    weekday[5] = "周五";
+    weekday[6] = "周六";
     var currentDay = weekday[D];
 
     var currentMonth = month[M];

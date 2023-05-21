@@ -6,33 +6,32 @@ import { DataComponent } from "../SearchData/DataComponent";
 import { FilterFeature } from "./FilterFeature";
 import { SearchRequest } from "./SearchRequest";
 import styles from "./SearchRequest.module.css"
-
-
+//import { useLocation } from 'react-router-dom';
+import { useParams } from 'react-router'
+import { useEffect } from "react";
 
 export const SearchPage = () => {
-
+    const param = useParams();
     const [showData, setShowData] = useState(HotelData)
     const [price, setPrice] = useState(false)
     const [star, setStar] = useState(false)
     // const [policy, setPolicy] = useState(false)
-
-
     const filterPrice = (e) => {
 
         if (e.target.name === "price") {
-            if (Number(e.target.value) === 1500) {
+            if (Number(e.target.value) === 1000) {
 
                 const filteredAbove1500 = HotelData.filter((el) => {
 
-                    return (Number(el.price) > 1500)
+                    return (Number(el.price) > 1000&&el.city === String(param.destination))
                 })
                 setShowData([...filteredAbove1500])
             }
-            else if (Number(e.target.value) === 1000) {
+            else if (Number(e.target.value) === 500) {
 
                 const filteredAbove1500 = HotelData.filter((el) => {
 
-                    return ((Number(el.price) >= 1000) && (Number(el.price) < 1500));
+                    return ((Number(el.price) >= 500) && (Number(el.price) < 1000)&&el.city === String(param.destination));
                 })
                 setShowData([...filteredAbove1500])
             }
@@ -40,12 +39,12 @@ export const SearchPage = () => {
 
                 const filteredAbove1500 = HotelData.filter((el) => {
 
-                    return (Number(el.price) <= 1000)
+                    return (Number(el.price) <= 500&&el.city === String(param.destination))
                 })
                 setShowData([...filteredAbove1500])
             }
 
-            setPrice(!price)
+            //setPrice(!price)
         }
         else {
             setShowData(HotelData)
@@ -56,51 +55,25 @@ export const SearchPage = () => {
     }
     const filterStar = (e) => {
 
-        if (price) {
-            const filteredAbove1500 = showData.filter((el) => {
+        if (e.target.name==="star") {
+            const filteredAbove1500 =  HotelData.filter((el) => {
 
-                return (Number(el.rating) === Number(e.target.value))
+                return (Number(el.rating) === Number(e.target.value)&&el.city === String(param.destination))
             })
             setShowData([...filteredAbove1500])
         }
 
-        else {
+      
 
-            const filteredAbove1500 = HotelData.filter((el) => {
-
-                return (Number(el.rating) === Number(e.target.value))
-            })
-            setShowData([...filteredAbove1500])
-        }
-
-        setStar(!star)
     }
     const filterPolicy = (e) => {
-        if (star || price) {
+        if (e.target.name="policy") {
 
-            if (e.target.value === "cancellation") {
-
-                const filteredAbove1500 = showData.filter((el) => {
-
-                    return (el.cancellation === "Free")
-                })
-                setShowData([...filteredAbove1500])
-            }
-            if (e.target.value === "breakFast") {
-
-                const filteredAbove1500 = showData.filter((el) => {
-
-                    return (el.breakFast === "Included")
-                })
-                setShowData([...filteredAbove1500])
-            }
-        }
-        else {
             if (e.target.value === "cancellation") {
 
                 const filteredAbove1500 = HotelData.filter((el) => {
 
-                    return (el.cancellation === "Free")
+                    return (el.cancellation === "免费"&&el.city === String(param.destination))
                 })
                 setShowData([...filteredAbove1500])
             }
@@ -108,26 +81,30 @@ export const SearchPage = () => {
 
                 const filteredAbove1500 = HotelData.filter((el) => {
 
-                    return (el.breakFast === "Included")
+                    return (el.breakFast === "包含"&&el.city === String(param.destination))
                 })
                 setShowData([...filteredAbove1500])
             }
         }
     }
-    const filterSearch = (search) => {
+    const filterSearch = () => {
 
-        const filteredData = HotelData.filter((e) => {
-            return (e.name.toLowerCase().includes(search.toLowerCase()))
+        const sendData = HotelData.filter((el) => {
+            return el.city === String(param.destination)
         })
-        setShowData(filteredData)
+        setShowData(sendData)
     }
+
+    useEffect(() => {
+        filterSearch();
+      }, []);
     return <>
         <div>
             <Navbar />
         </div>
         <div className={styles.serachPageContainer} >
             <div className={styles.left}>
-                <SearchRequest filterSearch={filterSearch} />
+                <SearchRequest/>
                 <FilterFeature filterPrice={filterPrice} filterStar={filterStar} filterPolicy={filterPolicy} />
             </div>
 

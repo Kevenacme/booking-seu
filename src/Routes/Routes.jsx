@@ -23,11 +23,11 @@ export const Routes = () => {
             <Route exact path="/orderlist">
                 <Orderlist />
             </Route>
-            <Route exact path="/search">
-                <SearchPage />
-            </Route>
-            <Route path="/search/:id">
+            <Route path="/search/:destination/:id">
                 <HotelDetails />
+            </Route>
+            <Route path="/search/:destination">
+                <SearchPage />
             </Route>
             <Route path="/search/:id/purchase">
                 <Purchase />

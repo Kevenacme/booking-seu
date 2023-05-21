@@ -121,27 +121,27 @@ export const FilterFeature = ({ filterPrice, filterStar, filterPolicy }) => {
 
             <div>
                 <div>
-                    <input type="radio" value="1500" onChange={handleFilterprice} name="price" />
-                    <p>1500元 +</p>
+                    <input type="radio" value="1000" onChange={handleFilterprice} name="price" />
+                    <p>1000元 +</p>
                 </div>
 
-                <p>{countAbove_1500}</p>
+                
             </div>
             <div>
                 <div>
-                    <input type="radio" value="1000" onChange={handleFilterprice} name="price" />
-                    <p>500元 - 1500元</p>
+                    <input type="radio" value="500" onChange={handleFilterprice} name="price" />
+                    <p>500元 - 1000元</p>
                 </div>
 
-                <p>{countAbove_1000}</p>
+               
             </div>
             <div>
                 <div>
                     <input type="radio" value="0" onChange={handleFilterprice} name="price" />
-                    <p>0元 - 1000元</p>
+                    <p>0元 - 500元</p>
                 </div>
 
-                <p>{countAbove_500}</p>
+               
             </div>
         </div>
         <div className={styles.rating}>
@@ -154,7 +154,7 @@ export const FilterFeature = ({ filterPrice, filterStar, filterPolicy }) => {
                     <p> 一星</p>
                 </div>
 
-                <p>{star1}</p>
+                
             </div>
             <div>
                 <div>
@@ -162,7 +162,7 @@ export const FilterFeature = ({ filterPrice, filterStar, filterPolicy }) => {
                     <p>二星</p>
                 </div>
 
-                <p>{star2}</p>
+                
             </div>
             <div>
                 <div>
@@ -170,7 +170,7 @@ export const FilterFeature = ({ filterPrice, filterStar, filterPolicy }) => {
                     <p> 三星</p>
                 </div>
 
-                <p>{star3}</p>
+                
             </div>
             <div>
                 <div>
@@ -178,7 +178,7 @@ export const FilterFeature = ({ filterPrice, filterStar, filterPolicy }) => {
                     <p> 四星</p>
                 </div>
 
-                <p>{star4}</p>
+              
             </div>
             <div>
                 <div>
@@ -186,7 +186,7 @@ export const FilterFeature = ({ filterPrice, filterStar, filterPolicy }) => {
                     <p> 五星</p>
                 </div>
 
-                <p>{star5}</p>
+    
             </div>
 
         </div>
@@ -198,8 +198,7 @@ export const FilterFeature = ({ filterPrice, filterStar, filterPolicy }) => {
                     <input type="radio" value="cancellation" name="policy" onChange={handleFilterPolicy} />
                     <p> 免费取消</p>
                 </div>
-
-                <p>{cancellation}</p>
+               
             </div>
             <div>
                 <div>
@@ -207,7 +206,6 @@ export const FilterFeature = ({ filterPrice, filterStar, filterPolicy }) => {
                     <p> 免费早餐</p>
                 </div>
 
-                <p>{breakfast}</p>
             </div>
         </div>
     </div>

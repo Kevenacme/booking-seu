@@ -32,23 +32,16 @@ margin:0 ;
 `
 export const HotelDetails = () => {
     const param = useParams()
-    const [, setShowData] = useState("")
+    //const [, setShowData] = useState("")
 
-    const sendData = HotelData.filter((el) => {
-        return el.id === Number(param.id)
+    const sendData = HotelData.filter((e) => {
+        return e.id === Number(param.id)
     })
-    const filterSearch = (search) => {
-
-        const filteredData = HotelData.filter((e) => {
-            return (e.name.toLowerCase().includes(search.toLowerCase()))
-        })
-        setShowData(filteredData)
-    }
     return (
         <>
             <Navbar />
             <Wrapper>
-                <SearchRequest filterSearch={filterSearch} />
+                <SearchRequest />
                 <Div>
                     <TopSection />
                     <TitleInfo type="hotel" name={`${sendData[0].name}`}

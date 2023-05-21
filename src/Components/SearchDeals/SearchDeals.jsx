@@ -2,14 +2,16 @@ import styles from "./SearchDeals.module.css"
 import React from "react"
 import Calendar from 'react-calendar';
 import { useState } from "react";
-import { countries } from "../../Utils/SuggitionItems";
+//import { countries } from "../../Utils/SuggitionItems";
 import 'react-calendar/dist/Calendar.css';
-import { Searchbar } from "./Suggestion/Searchbar";
+//import { Searchbar } from "./Suggestion/Searchbar";
 import { Link } from "react-router-dom";
 
 
-export const SearchDeals = () => {
 
+
+export const SearchDeals = () => {
+    const [destination, setDestination]=useState('');
     const [initvalue, onInitChange] = useState(new Date());
     const [endvalue, onEndChange] = useState(new Date());
     const [intiDate, setInitDate] = useState(false)
@@ -22,23 +24,7 @@ export const SearchDeals = () => {
     const [children, setChildren] = useState(0)
     const [rooms, setRooms] = useState(2)
 
-    const [query, setQuery] = React.useState("");
-    const [, setLoading] = React.useState(false);
-    const [suggestions, setSuggestions] = React.useState([]);
-    React.useEffect(() => {
-        if (query === "") {
-            setSuggestions([]);
-        } else {
-            let out = countries
-                .filter((item) =>
-                    item.country.toLowerCase().indexOf(query) !== -1 ? true : false
-                )
-                .map((item) => item.country);
-            setSuggestions(out);
-            //console.log(out);
-            // setLoading(false);
-        }
-    }, [query]);
+   
 
 
 
@@ -94,7 +80,10 @@ export const SearchDeals = () => {
             }
         })
     }
-
+    
+    const handleDestinationChange =(e)=>{
+          setDestination(e.target.value);
+    }
 
     return <div className={styles.main}>
 
@@ -118,16 +107,9 @@ export const SearchDeals = () => {
                     </div>
                     <div className={styles.input}>
 
-                        <Searchbar
-                            className={styles.suggestions}
-                            value={query}
-                            setQuery={setQuery}
-                            loading={false}
-                            setLoading={setLoading}
-                            suggestions={suggestions}
-                            setSuggestions={setSuggestions}
-                            onChange={(value) => setQuery(value)}
-                        />
+                        <div className={styles.SearchBarWrapper}>
+                            <input className={styles.destinationinput} onChange={handleDestinationChange} placeholder="目的地?"></input>
+                        </div>
 
                     </div>
                     <div className={styles.Cross}>
@@ -140,18 +122,17 @@ export const SearchDeals = () => {
                             <svg fill="#BDBDBD" focusable="false" height="20" role="presentation" width="20" viewBox="0 0 128 128"><path d="m112 16h-16v-8h-8v8h-48v-8h-8v8h-16c-4.4 0-8 3.9-8 8.7v86.6c0 4.8 3.6 8.7 8 8.7h96c4.4 0 8-3.9 8-8.7v-86.6c0-4.8-3.6-8.7-8-8.7zm0 95.3a1.1 1.1 0 0 1 -.2.7h-95.6a1.1 1.1 0 0 1 -.2-.7v-71.3h96zm-68-43.3h-12v-12h12zm0 28h-12v-12h12zm26-28h-12v-12h12zm0 28h-12v-12h12zm26 0h-12v-12h12zm0-28h-12v-12h12z" fillRule="evenodd"></path></svg>
                         </div>
                         <div onClick={handleInitDate}>
+                           
                             <p>
-                                {currentDay}
+                                {currentMonth}
+
                             </p>
 
                             <p>
                                 {currentDayNum}
 
                             </p>
-                            <p>
-                                {currentMonth}
-
-                            </p>
+                           
                             -
                         </div>
                         <div>
@@ -159,17 +140,14 @@ export const SearchDeals = () => {
                         </div>
                         <div onClick={handleEndDate}>
                             <p>
-                                {endDay}
-                            </p>
+                                {endMonth}
 
+                            </p>
                             <p>
                                 {endDayNum}
 
                             </p>
-                            <p>
-                                {endMonth}
-
-                            </p>
+                            
 
                         </div>
                     </div>
@@ -181,7 +159,7 @@ export const SearchDeals = () => {
 
 
                             <div className={styles.calenderItem}>
-                                <p className={styles.datePicke}>Start Date</p>
+                                <p className={styles.datePicke}>入住日期</p>
                                 <Calendar
                                     onChange={onInitChange}
                                     value={initvalue}
@@ -192,7 +170,7 @@ export const SearchDeals = () => {
                         {
                             endDate &&
                             <div className={styles.calenderItem2}>
-                                <p className={styles.datePicke}>End date</p>
+                                <p className={styles.datePicke}>离店日期</p>
                                 <Calendar
                                     onChange={onEndChange}
                                     value={endvalue}
@@ -300,8 +278,7 @@ export const SearchDeals = () => {
                 </div>
 
                 <div className={styles.button}>
-                    <Link to="/search">
-
+                    <Link to={`/search/${destination}`}>
                         <button>搜索</button>
                     </Link>
                 </div>
@@ -323,18 +300,18 @@ function endDatePicker(D, M, day) {
     for (let i = 0; i < 12; i++) {
         month.push(0)
     }
-    month[0] = "Jan";
-    month[1] = "Feb";
-    month[2] = "March";
-    month[3] = "Apr";
-    month[4] = "May";
-    month[5] = "June";
-    month[6] = "July";
-    month[7] = "Aug";
-    month[8] = "Sept";
-    month[9] = "Oct";
-    month[10] = "Nov";
-    month[11] = "Dec";
+    month[0] = "1.";
+    month[1] = "2.";
+    month[2] = "3.";
+    month[3] = "4.";
+    month[4] = "5.";
+    month[5] = "6.";
+    month[6] = "7.";
+    month[7] = "8.";
+    month[8] = "9.";
+    month[9] = "10";
+    month[10] = "11.";
+    month[11] = "12.";
 
     var weekday = [];
     for (let i = 0; i < 7; i++) {
