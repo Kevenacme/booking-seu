@@ -1,10 +1,11 @@
 import React from 'react';
 import { Navbar } from '../Navbar/Navbar';
 import { Table } from 'antd';
-import { useState,useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import { Empty } from 'antd';
 const Orderlist = ({ price, hotelname, checkindate, checkoutdate, roommodel }) => {
     const [data, setData] = useState([]); // 状态变量，用于存储表格数据
-
+    const [isEmpty, setIsEmpty] = useState(false);
     useEffect(() => {
         // 每次传入新参数时，创建新的数据行并添加到数据数组中
         const newRow = {
@@ -14,7 +15,9 @@ const Orderlist = ({ price, hotelname, checkindate, checkoutdate, roommodel }) =
             Checkoutdate: checkoutdate,
             Roommodel: roommodel,
         };
+
         setData(prevData => [...prevData, newRow]);
+        setIsEmpty(prevIsEmpty => prevIsEmpty || data.length === 0);
     }, [price, hotelname, checkindate, checkoutdate, roommodel]);
     const columns = [
         {
@@ -50,9 +53,11 @@ const Orderlist = ({ price, hotelname, checkindate, checkoutdate, roommodel }) =
     return (
         <div className='container'>
             <Navbar />
-            <Table
-                columns={columns}
-                dataSource={data} />
+            {isEmpty ? (
+                <Empty style={{justifyContent: 'center',marginTop:'150px'}}/>
+            ) : (
+                <Table columns={columns} dataSource={data} />
+            )}
         </div>
     );
 };
