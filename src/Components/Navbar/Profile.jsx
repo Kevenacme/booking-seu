@@ -6,12 +6,15 @@ import { Link } from "react-router-dom";
 export const Profile = () => {
     //const data = JSON.parse(localStorage.getItem("login"))
     const data = localStorage.getItem("login")
+    const usersData = localStorage.getItem('users');
+    const users = usersData ? JSON.parse(usersData) : [];
+    
     //const [logout, setLogout] = useState(false)
     //需要从数据库调取数据并设置用户名
     let userData
     if (data) {
         userData = {
-            name: "Acme"
+            name: users[0].username
         }
     }
     //
@@ -23,6 +26,7 @@ export const Profile = () => {
     }
     const handleLogout = () => {
         localStorage.removeItem("login")
+        localStorage.removeItem("users")
         alert("Successfully Logged Out")
         window.location.reload();
         //window.location.href = "https://localhost:3000"

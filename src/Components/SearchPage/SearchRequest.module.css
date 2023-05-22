@@ -339,3 +339,9 @@ width: 40%;
  cursor: pointer;
  font-size: 24px;
 }
+
+.paginationStyle{
+    display:flex;
+    justify-content: center; 
+    margin-top: 20px;
+}

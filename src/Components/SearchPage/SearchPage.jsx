@@ -9,12 +9,20 @@ import styles from "./SearchRequest.module.css"
 //import { useLocation } from 'react-router-dom';
 import { useParams } from 'react-router'
 import { useEffect } from "react";
-
+import { Pagination } from 'antd';
 export const SearchPage = () => {
     const param = useParams();
     const [showData, setShowData] = useState(HotelData)
     const [price, setPrice] = useState(false)
     const [star, setStar] = useState(false)
+    const [currentPage, setCurrentPage] = useState(1);
+    const hotelsPerPage = 5;
+    const indexOfLastHotel = currentPage * hotelsPerPage;
+    const indexOfFirstHotel = indexOfLastHotel - hotelsPerPage;
+    const currentHotels = showData.slice(indexOfFirstHotel, indexOfLastHotel);
+    const handlePageChange = (page) => {
+        setCurrentPage(page);
+    };
     // const [policy, setPolicy] = useState(false)
     const filterPrice = (e) => {
 
@@ -23,7 +31,7 @@ export const SearchPage = () => {
 
                 const filteredAbove1500 = HotelData.filter((el) => {
 
-                    return (Number(el.price) > 1000&&el.city === String(param.destination))
+                    return (Number(el.price) > 1000 && el.city === String(param.destination))
                 })
                 setShowData([...filteredAbove1500])
             }
@@ -31,7 +39,7 @@ export const SearchPage = () => {
 
                 const filteredAbove1500 = HotelData.filter((el) => {
 
-                    return ((Number(el.price) >= 500) && (Number(el.price) < 1000)&&el.city === String(param.destination));
+                    return ((Number(el.price) >= 500) && (Number(el.price) < 1000) && el.city === String(param.destination));
                 })
                 setShowData([...filteredAbove1500])
             }
@@ -39,7 +47,7 @@ export const SearchPage = () => {
 
                 const filteredAbove1500 = HotelData.filter((el) => {
 
-                    return (Number(el.price) <= 500&&el.city === String(param.destination))
+                    return (Number(el.price) <= 500 && el.city === String(param.destination))
                 })
                 setShowData([...filteredAbove1500])
             }
@@ -55,25 +63,25 @@ export const SearchPage = () => {
     }
     const filterStar = (e) => {
 
-        if (e.target.name==="star") {
-            const filteredAbove1500 =  HotelData.filter((el) => {
+        if (e.target.name === "star") {
+            const filteredAbove1500 = HotelData.filter((el) => {
 
-                return (Number(el.rating) === Number(e.target.value)&&el.city === String(param.destination))
+                return (Number(el.rating) === Number(e.target.value) && el.city === String(param.destination))
             })
             setShowData([...filteredAbove1500])
         }
 
-      
+
 
     }
     const filterPolicy = (e) => {
-        if (e.target.name="policy") {
+        if (e.target.name = "policy") {
 
             if (e.target.value === "cancellation") {
 
                 const filteredAbove1500 = HotelData.filter((el) => {
 
-                    return (el.cancellation === "免费"&&el.city === String(param.destination))
+                    return (el.cancellation === "免费" && el.city === String(param.destination))
                 })
                 setShowData([...filteredAbove1500])
             }
@@ -81,7 +89,7 @@ export const SearchPage = () => {
 
                 const filteredAbove1500 = HotelData.filter((el) => {
 
-                    return (el.breakFast === "包含"&&el.city === String(param.destination))
+                    return (el.breakFast === "包含" && el.city === String(param.destination))
                 })
                 setShowData([...filteredAbove1500])
             }
@@ -97,14 +105,15 @@ export const SearchPage = () => {
 
     useEffect(() => {
         filterSearch();
-      }, []);
+    }, []);
+
     return <>
         <div>
             <Navbar />
         </div>
         <div className={styles.serachPageContainer} >
             <div className={styles.left}>
-                <SearchRequest/>
+                <SearchRequest />
                 <FilterFeature filterPrice={filterPrice} filterStar={filterStar} filterPolicy={filterPolicy} />
             </div>
 
@@ -112,7 +121,7 @@ export const SearchPage = () => {
                 {/* <ul className={styles.listOfHotels} > */}
 
                 {
-                    showData.map((e, i) => {
+                    currentHotels.map((e, i) => {
                         // console.log(e.url);
 
 
@@ -140,8 +149,17 @@ export const SearchPage = () => {
                 {/* </ul> */}
 
             </div>
-        </div>
 
+        </div>
+        <div className={styles.paginationStyle}>
+        <Pagination
+            current={currentPage}
+            pageSize={hotelsPerPage}
+            total={showData.length}
+            onChange={handlePageChange}
+        />
+        </div>
+        
         <FooterBlue />
 
     </>
